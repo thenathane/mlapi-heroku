@@ -62,68 +62,6 @@ def pred(input_parameters: model_input):
     input_data = input_parameters.json()
     input_dictionary = json.loads(input_data)
     
-    tenure = input_dictionary['Tenure']
-    warehouseToHome = input_dictionary['WarehouseToHome']
-    hourSpendOnApp = input_dictionary['HourSpendOnApp']
-    numberOfDeviceRegistered = input_dictionary['NumberOfDeviceRegistered']
-    satisfactionScore = input_dictionary['SatisfactionScore']
-    complain = input_dictionary['Complain']
-    orderAmountHikeFromlastYear = input_dictionary['OrderAmountHikeFromlastYear']
-    couponUsed = input_dictionary['CouponUsed']
-    orderCount = input_dictionary['OrderCount']
-    daySinceLastOrder = input_dictionary['DaySinceLastOrder']
-    cashbackAmount = input_dictionary['CashbackAmount']
-    preferredLoginDevice_Mobile_Phone = input_dictionary['PreferredLoginDevice_Mobile_Phone']
-    preferredLoginDevice_Phone = input_dictionary['PreferredLoginDevice_Phone']
-    cityTier_2 = input_dictionary['CityTier_2']
-    cityTier_3 = input_dictionary['CityTier_3']
-    preferredPaymentMode_COD = input_dictionary['PreferredPaymentMode_COD']
-    preferredPaymentMode_Cash_on_Delivery = input_dictionary['PreferredPaymentMode_Cash_on_Delivery']
-    preferredPaymentMode_Credit_Card = input_dictionary['PreferredPaymentMode_Credit_Card']
-    preferredPaymentMode_Debit_Card = input_dictionary['PreferredPaymentMode_Debit_Card']
-    preferredPaymentMode_E_wallet = input_dictionary['PreferredPaymentMode_E_wallet']
-    preferredPaymentMode_UPI = input_dictionary['PreferredPaymentMode_UPI']
-    gender_Male = input_dictionary['Gender_Male']
-    preferedOrderCat_Grocery = input_dictionary['PreferedOrderCat_Grocery']
-    preferedOrderCat_Laptop_n_Accessory = input_dictionary['PreferedOrderCat_Laptop_n_Accessory']
-    preferedOrderCat_Mobile = input_dictionary['PreferedOrderCat_Mobile']
-    preferedOrderCat_Mobile_Phone = input_dictionary['PreferedOrderCat_Mobile_Phone']
-    preferedOrderCat_Others = input_dictionary['PreferedOrderCat_Others']
-    maritalStatus_Married = input_dictionary['MaritalStatus_Married']
-    maritalStatus_Single = input_dictionary['MaritalStatus_Single']
-
-    input_list = [
-        tenure,
-        warehouseToHome,
-        hourSpendOnApp,
-        numberOfDeviceRegistered,
-        satisfactionScore,
-        complain,
-        orderAmountHikeFromlastYear,
-        couponUsed,
-        orderCount,
-        daySinceLastOrder,
-        cashbackAmount,
-        preferredLoginDevice_Mobile_Phone,
-        preferredLoginDevice_Phone,
-        cityTier_2,
-        cityTier_3,
-        preferredPaymentMode_COD,
-        preferredPaymentMode_Cash_on_Delivery,
-        preferredPaymentMode_Credit_Card,
-        preferredPaymentMode_Debit_Card,
-        preferredPaymentMode_E_wallet,
-        preferredPaymentMode_UPI,
-        gender_Male,
-        preferedOrderCat_Grocery,
-        preferedOrderCat_Laptop_n_Accessory,
-        preferedOrderCat_Mobile,
-        preferedOrderCat_Mobile_Phone,
-        preferedOrderCat_Others,
-        maritalStatus_Married,
-        maritalStatus_Single
-    ]
-    
-    prediction = model.predict(np.array(input_list).reshape(1, -1))
+    prediction = model.predict(pd.DataFrame([input_dictionary]))
     return prediction
 
