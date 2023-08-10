@@ -9,16 +9,8 @@ import json
 
 app = FastAPI()
 
-origins = ["*"]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
+# loading the saved model
+model = pickle.load(open('bounce_model.sav', 'rb'))
 
 class model_input(BaseModel):
     Tenure: float
@@ -51,11 +43,6 @@ class model_input(BaseModel):
     MaritalStatus_Married: int
     MaritalStatus_Single: int
     
-
-# loading the saved model
-model = pickle.load(open('bounce_model.sav', 'rb'))
-
-
 @app.post('/predict')
 def pred(input_parameters: model_input):
     
@@ -64,4 +51,3 @@ def pred(input_parameters: model_input):
     
     prediction = model.predict(pd.DataFrame([input_dictionary]))
     return prediction
-
