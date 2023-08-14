@@ -48,6 +48,26 @@ def pred(input_parameters: model_input):
     
     input_data = input_parameters.json()
     input_dictionary = json.loads(input_data)
-    
-    prediction = model.predict(pd.DataFrame([input_dictionary]))
-    return prediction
+
+    try:
+        ready = pd.DataFrame([input_dictionary])
+        prediction = loaded_model.predict(ready)
+
+        result_list = [int(item) for item in prediction]
+
+        response_data = {
+            "success": True,
+            "message": "Prediction successful",
+            "predictions": result_list
+        }
+
+        json_response = json.dumps(response_data)
+        return json_response
+    except:
+        response_data = {
+            "success": False,
+            "message": "Prediction failed",
+            "predictions": []
+        }
+
+        return response_data
