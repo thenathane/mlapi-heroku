@@ -44,8 +44,8 @@ class model_input(BaseModel):
     MaritalStatus_Single: int
     
 @app.post('/predict')
-def pred(input_parameters: model_input):
-    
+def predict(input_parameters : model_input):
+
     input_data = input_parameters.json()
     input_dictionary = json.loads(input_data)
 
