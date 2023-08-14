@@ -1,18 +1,35 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-import pandas as pd
-import numpy as np
-import pickle
 import json
+import pickle
+import joblib
+import uvicorn
+import nest_asyncio
 
+import numpy as np
+import pandas as pd
+import xgboost as xgb
+
+from pyngrok import ngrok
+from fastapi import FastAPI
+from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # loading the saved model
 model = pickle.load(open('bounce_model.sav', 'rb'))
 
 class model_input(BaseModel):
+
     Tenure: float
     WarehouseToHome: float
     HourSpendOnApp: float
